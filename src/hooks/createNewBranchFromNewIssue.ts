@@ -1,55 +1,59 @@
 import * as Webhooks from "@octokit/webhooks";
 
 import { Hook } from "./types";
-import { GITHUB_AUTHOR_ASSOCIATION } from "../constants";
+import generateBranchNameFromText from "../helpers/generateBranchNameFromText";
+import isCollaborator from "../helpers/isCollaborator";
 
+/**
+ * Auto-generate a branch named after the issue title if a a collaborator-like user for the related
+ * repository is the one who opened it.
+ *
+ * @todo Check if the branch does not already exists.
+ */
 let createNewBranchFromNewIssue: Hook<Webhooks.WebhookPayloadIssues>;
 export default createNewBranchFromNewIssue = async function(context) {
   const { id, github, name, payload } = context;
-  this.log(`[${name}] [#${id}] Event received`);
+  const LOG_PREFIX = `[${name}] [#${id}]`;
+  this.log(`${LOG_PREFIX} Event received`);
 
   try {
-    if (
-      ![GITHUB_AUTHOR_ASSOCIATION.COLLABORATOR, GITHUB_AUTHOR_ASSOCIATION.OWNER].includes(
-        payload.issue.author_association
-      )
-    ) {
-      return;
-    }
+    // Only repository collaborator-like users are allowed to call this hook:
+    if (!isCollaborator(payload.issue.author_association)) return;
+    this.log(`${LOG_PREFIX} Creating new branch for issue ${payload.issue.html_url}`);
 
-    this.log(`[${name}] [#${id}] Creating new branch for issue ${payload.issue.html_url}`);
+    const defaultBranchName = context.payload.repository.default_branch;
+    const repositoryOwner = context.payload.repository.owner.login;
+    const repositoryName = context.payload.repository.name;
+    const newBranchName = generateBranchNameFromText(payload.issue.title);
 
-    const defaultBranch = context.payload.repository.default_branch;
-    const owner = context.payload.repository.owner.login;
-    const repo = context.payload.repository.name;
-    const newBranch = payload.issue.title
-      .toLowerCase()
-      .replace(/[^a-z0-9]/g, "-")
-      .replace(/-+/g, "-")
-      .replace(/^-|-$/, "");
-
+    // Fetch the default branch info:
     // http://octokit.github.io/rest.js/#octokit-routes-repos-get-branch
-    const {
-      data: { commit: defaultBranchCommit }
-    } = await github.repos.getBranch({ owner, repo, branch: defaultBranch });
+    const { data: defaultBranchData } = await github.repos.getBranch({
+      branch: defaultBranchName,
+      owner: repositoryOwner,
+      repo: repositoryName
+    });
+    const defaultBranchCommitHash = defaultBranchData.commit.sha;
 
+    // Create a new branch from the last default branch commit:
     // http://octokit.github.io/rest.js/#octokit-routes-git-create-ref
     // https://stackoverflow.com/a/9513594/2736233
     await github.git.createRef({
-      owner,
-      repo,
-      ref: `refs/heads/${newBranch}`,
-      sha: defaultBranchCommit.sha
+      owner: repositoryOwner,
+      ref: `refs/heads/${newBranchName}`,
+      repo: repositoryName,
+      sha: defaultBranchCommitHash
     });
 
+    // Post a new comment on this issue to confirm the branch creation:
     // http://octokit.github.io/rest.js/#octokit-routes-issues-create-comment
-    await github.issues.createComment(
-      context.issue({
-        body: `Branch \`${newBranch}\` created. You can now run:\n\n    git fetch -p && git checkout ${newBranch}.`
-      })
-    );
+    const newIssueCommentBody =
+      `Branch \`${newBranchName}\` created. You can now run:\n\n` +
+      `    git fetch -p && git checkout ${newBranchName}.`;
+    const newIssueComment = context.issue({ body: newIssueCommentBody });
+    await github.issues.createComment(newIssueComment);
   } catch (err) {
-    this.log.error(`[${name}] [#${id}] ERROR: ${err.message}`);
+    this.log.error(`${LOG_PREFIX} ERROR: ${err.message}`);
     this.log.debug(err);
   }
 };
