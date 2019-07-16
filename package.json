@@ -5,23 +5,26 @@
   "license": "Apache-2.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch ./src --watch ./.env --watch ./app.yml --exec yarn start",
-    "start": "probot run ./src",
+    "build": "tsc -p tsconfig.json",
+    "dev": "concurrently --handle-input --raw \"yarn build\" \"nodemon\"",
+    "start": "probot run ./build",
     "test": "yarn test:lint",
-    "test:lint": "eslint ./src"
+    "test:lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
     "probot": "9.2.19"
   },
   "devDependencies": {
-    "eslint": "5.16.0",
-    "eslint-config-airbnb-base": "13.2.0",
-    "eslint-config-prettier": "6.0.0",
-    "eslint-plugin-import": "2.18.0",
+    "concurrently": "4.1.1",
     "nock": "10.0.6",
     "nodemon": "1.19.1",
     "prettier": "1.18.2",
-    "smee-client": "1.1.0"
+    "smee-client": "1.1.0",
+    "tslint": "5.18.0",
+    "tslint-config-airbnb": "5.11.1",
+    "tslint-config-prettier": "1.18.0",
+    "tslint-plugin-prettier": "2.0.1",
+    "typescript": "3.5.3"
   },
   "jest": {
     "testEnvironment": "node"
