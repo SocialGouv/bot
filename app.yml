@@ -1,0 +1,124 @@
+name: SocialGouv Bot
+description: A Github bot for @SocialGouv projects.
+url: https://github.com/SocialGouv/bot
+public: false
+
+# https://developer.github.com/webhooks/#events
+default_events:
+- check_run
+- check_suite
+- commit_comment
+# - content_reference
+- create
+- delete
+# - deploy_key
+# - deployment
+# - deployment_status
+# - fork
+# - github_app_authorization
+# - gollum
+# - installation
+# - installation_repositories
+- issue_comment
+- issues
+- label
+# - marketplace_purchase
+# - member
+# - membership
+- meta
+- milestone
+# - organization
+# - org_block
+# - page_build
+- project
+- project_card
+- project_column
+# - public
+- pull_request
+- pull_request_review
+- pull_request_review_comment
+- push
+# - registry_package
+- release
+- repository
+- repository_import
+# - repository_vulnerability_alert
+- security_advisory
+# - star
+- status
+# - team
+# - team_add
+# - watch
+
+default_permissions:
+  # Repository creation, deletion, settings, teams, and collaborators.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-administration
+  # administration: read
+
+  # Checks on code.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-checks
+  checks: write
+
+  # Repository contents, commits, branches, downloads, releases, and merges.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-contents
+  contents: write
+
+  # Deployments and deployment statuses.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-deployments
+  # deployments: read
+
+  # Issues and related comments, assignees, labels, and milestones.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-issues
+  issues: write
+
+  # Search repositories, list collaborators, and access repository metadata.
+  # https://developer.github.com/v3/apps/permissions/#metadata-permissions
+  metadata: read
+
+  # Retrieve Pages statuses, configuration, and builds, as well as create new builds.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-pages
+  # pages: read
+
+  # Pull requests and related comments, assignees, labels, milestones, and merges.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-pull-requests
+  pull_requests: read
+
+  # Manage the post-receive hooks for a repository.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-repository-hooks
+  # repository_hooks: read
+
+  # Manage repository projects, columns, and cards.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-repository-projects
+  repository_projects: write
+
+  # Retrieve security vulnerability alerts.
+  # https://developer.github.com/v4/object/repositoryvulnerabilityalert/
+  vulnerability_alerts: read
+
+  # Commit statuses.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-statuses
+  statuses: write
+
+  # Organization members and teams.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-members
+  members: read
+
+  # View and manage users blocked by the organization.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-organization-user-blocking
+  # organization_user_blocking: read
+
+  # Manage organization projects, columns, and cards.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-organization-projects
+  organization_projects: write
+
+  # Manage team discussions and related comments.
+  # https://developer.write.com/v3/apps/permissions/#permission-on-team-discussions
+  team_discussions: read
+
+  # Manage the post-receive hooks for an organization.
+  # https://developer.github.com/v3/apps/permissions/#permission-on-organization-hooks
+  # organization_hooks: read
+
+  # Get notified of, and update, content references.
+  # https://developer.github.com/v3/apps/permissions/
+  # organization_administration: read
