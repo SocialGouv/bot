@@ -34,9 +34,6 @@ module.exports = async function createNewBranchFromNewIssues(context) {
 
         // http://octokit.github.io/rest.js/#octokit-routes-git-create-ref
         // https://stackoverflow.com/a/9513594/2736233
-        this.log({
-          owner, ref: `refs/heads/${newBranch}`, repo, sha: defaultBranchCommit.sha,
-        });
         await github.git.createRef({
           owner, ref: `refs/heads/${newBranch}`, repo, sha: defaultBranchCommit.sha,
         });
