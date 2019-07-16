@@ -19,7 +19,7 @@ A Github bot for @SocialGouv projects.
 Those are the planned features:
 
 -   Enforce naming rules for issues, branches & pull requests title and make it cutomizable via a
-    `socialgouv.yml` file
+    `socialgouv.yml` file.
 -   Auto-generate issues when new todos are detected within the source code.
 -   Auto-close todo-releated issues when todos are removed from the source code.
 
