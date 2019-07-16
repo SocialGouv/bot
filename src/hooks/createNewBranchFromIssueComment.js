@@ -2,7 +2,7 @@
 
 const { GITHUB_AUTHOR_ASSOCIATION } = require('../constants');
 
-module.exports = async function createNewBranchFromNewIssues(context) {
+module.exports = async function createNewBranchFromIssueComment(context) {
   const {
     id, github, name, payload,
   } = context;

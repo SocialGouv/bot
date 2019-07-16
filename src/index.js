@@ -1,5 +1,5 @@
-const createNewBranchFromNewIssues = require('./hooks/createNewBranchFromNewIssues');
+const createNewBranchFromIssueComment = require('./hooks/createNewBranchFromIssueComment');
 
 module.exports = (app) => {
-  app.on('issue_comment.created', createNewBranchFromNewIssues.bind(app));
+  app.on('issue_comment.created', createNewBranchFromIssueComment.bind(app));
 };
