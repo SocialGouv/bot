@@ -49,6 +49,6 @@ This project is open-sourced under the [Apache 2.0 license][link-license].
 
 ---
 
-[img-travis]: https://img.shields.io/travis/SocialGouv/bot.svg?style=flat-square
+[img-travis]: https://img.shields.io/travis/com/SocialGouv/bot.svg?style=flat-square
 [link-license]: https://github.com/SocialGouv/bot/blob/master/LICENSE
 [link-travis]: https://travis-ci.com/SocialGouv/bot
