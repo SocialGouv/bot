@@ -22,6 +22,8 @@ Those are the planned features:
     `socialgouv.yml` file.
 -   Auto-generate issues when new todos are detected within the source code.
 -   Auto-close todo-releated issues when todos are removed from the source code.
+-   Generate labels from `socialgouv.yml` file.
+-   Extend config from GitHub repo (renovate like).
 
 ## Contribute
 
