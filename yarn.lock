@@ -2482,10 +2482,10 @@ prettier@1.18.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
   integrity sha512-OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==
 
-probot@9.6.2:
-  version "9.6.2"
-  resolved "https://registry.yarnpkg.com/probot/-/probot-9.6.2.tgz#c77777d65022aa2758ad4573fb214297d2884637"
-  integrity sha512-7HERD8WaX0OyqEbqQuHBWOudIbzxIfnmboyURPZflsUDPuOYigow+tpvUJeYkMtLyDmwOrOk1J8mgKckEjZfsA==
+probot@9.6.3:
+  version "9.6.3"
+  resolved "https://registry.yarnpkg.com/probot/-/probot-9.6.3.tgz#226cb54fe16c4cb7387cae5250fc60bda604a53a"
+  integrity sha512-sqZ4RLrBHeyzxQv2PozE8iyjcYSTdiZH0DBiYR7xVA/EvvaMYhB0W8J+nlB5pj8hrj70UIgLgo9ripPvB8XTlw==
   dependencies:
     "@octokit/app" "^4.0.0"
     "@octokit/graphql" "^4.2.0"
