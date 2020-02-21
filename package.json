@@ -12,7 +12,7 @@
     "test:lint": "tslint -p tsconfig.json"
   },
   "dependencies": {
-    "probot": "9.9.4"
+    "probot": "9.9.5"
   },
   "devDependencies": {
     "concurrently": "5.1.0",
