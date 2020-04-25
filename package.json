@@ -15,7 +15,7 @@
     "probot": "9.11.3"
   },
   "devDependencies": {
-    "concurrently": "5.1.0",
+    "concurrently": "5.2.0",
     "nock": "12.0.3",
     "nodemon": "2.0.3",
     "prettier": "1.19.1",
